@@ -1,42 +1,65 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
+import { makeStyles } from "@material-ui/styles"
+import BackgroundImage from "gatsby-background-image"
+import Typography from "@material-ui/core/Typography"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+const useStyles = makeStyles(() => ({
+  header: {
+    height: "30rem",
+    width: "100%",
+  },
+  title: {
+    fontWeight: 600,
+    fontSize: "4.2rem",
+    color: "white",
+    textShadow: "2px 2px rgb(82, 81, 81)",
+  },
+  hero: {
+    height: "100%",
+    width: "100%",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: `1 !important`,
+  },
+}))
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const Header = () => {
+  const classes = useStyles()
+  const { backgroundImage } = useStaticQuery(graphql`
+    query {
+      backgroundImage: file(relativePath: { eq: "hero.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90, maxWidth: 1920) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
 
-Header.defaultProps = {
-  siteTitle: ``,
+  const backgroundFluidImageStack = [
+    `linear-gradient(rgba(36, 36, 36, 0.3), rgba(13, 13, 13, 0.3))`,
+    backgroundImage.childImageSharp.fluid,
+  ]
+
+  return (
+    <header className={classes.header}>
+      <BackgroundImage
+        Tag="div"
+        fluid={backgroundFluidImageStack}
+        className={classes.hero}
+      >
+        <Typography variant="h1" className={classes.title}>
+          Restaurant Review Blog!
+        </Typography>
+      </BackgroundImage>
+    </header>
+  )
 }
 
 export default Header
