@@ -43,7 +43,7 @@ const Header = () => {
   `)
 
   const backgroundFluidImageStack = [
-    `linear-gradient(rgba(36, 36, 36, 0.3), rgba(13, 13, 13, 0.3))`,
+    `linear-gradient(rgba(36, 36, 36, 0.5), rgba(13, 13, 13, 0.5))`,
     backgroundImage.childImageSharp.fluid,
   ]
 

@@ -9,6 +9,7 @@ const useStyles = makeStyles(() => ({
   blogPost: {
     width: "100%",
     color: "white",
+    margin: "2rem",
   },
   blogThumbnail: {
     minHeight: "15rem",
@@ -19,7 +20,7 @@ const useStyles = makeStyles(() => ({
     overflow: "auto",
   },
   blogTitle: {
-    fontSize: "1.7rem",
+    fontSize: "2.4rem",
     fontWeight: 700,
   },
   blogSummary: {
@@ -28,9 +29,8 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const BlogCard = ({ gridName, blog }) => {
+const BlogCard = ({ blog }) => {
   const classes = useStyles()
-  console.log(blog)
 
   const image = [
     `linear-gradient(rgba(36, 36, 36, 0.6), rgba(13, 13, 13, 0.8))`,
@@ -38,7 +38,7 @@ const BlogCard = ({ gridName, blog }) => {
   ]
 
   return (
-    <Paper className={classes.blogPost} style={{ gridArea: gridName }}>
+    <Paper className={classes.blogPost}>
       <BackgroundImage
         Tag="div"
         fluid={image}

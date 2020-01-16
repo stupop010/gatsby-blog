@@ -9,6 +9,13 @@ const useStyles = makeStyles(() => ({
     "&:hover": {
       background: "rgb(129, 129, 130)",
     },
+
+    "& a:visited": {
+      color: "black",
+    },
+    "& a": {
+      color: "black",
+    },
   },
 }))
 
@@ -16,7 +23,9 @@ const PostLink = ({ path }) => {
   const classes = useStyles()
   return (
     <Button className={classes.button}>
-      <Link to={path}>Read More</Link>
+      <Link to={path} className={classes.link}>
+        Read More
+      </Link>
     </Button>
   )
 }
